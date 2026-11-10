@@ -13,6 +13,7 @@ Code).
 | `babysit-pr` | Monitor a PR through review and CI. Includes the `pr-wait` watcher script. |
 | `council` | Get reviews from strong models of several providers. |
 | `file-pr` | File a concise pull request. |
+| `full-flow` | Run `full-stop`, then `council`, then merge. |
 | `full-pr` | Take work to a merged PR without supervision. |
 | `full-stop` | Like `full-pr`, but stop with the PR ready to merge. |
 | `full-send` | Commit to main and push. |
