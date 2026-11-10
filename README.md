@@ -1,7 +1,12 @@
 # agent-skills
 
-My skills for coding agents (Claude Code, Codex, T3 Code). Each folder is one
-skill with a `SKILL.md`.
+My global instructions and skills for coding agents (Claude Code, Codex, T3
+Code).
+
+- `AGENTS.md` holds my global instructions. Claude Code reads it as
+  `~/.claude/CLAUDE.md`, and Codex reads it as `~/.codex/AGENTS.md`.
+- `skills/` holds one folder per skill, each with a `SKILL.md`.
+- `bin/link-claude-skills.sh` links each skill into `~/.claude/skills`.
 
 | Skill | Use |
 | --- | --- |
@@ -18,22 +23,25 @@ skill with a `SKILL.md`.
 
 ## Install on a new machine
 
-Clone into `~/.agents/skills`, where Codex reads skills. Then link each skill
-into `~/.claude/skills` for Claude Code.
+Clone into `~/.agents`. Codex reads skills from `~/.agents/skills`. Then link
+the instructions and the skills for Claude Code and Codex.
 
 ```sh
-git clone https://github.com/Anton-M-R/agent-skills.git ~/.agents/skills
-mkdir -p ~/.claude/skills
-for d in ~/.agents/skills/*/; do ln -sfn "${d%/}" ~/.claude/skills/; done
+git clone https://github.com/Anton-M-R/agent-skills.git ~/.agents
+mkdir -p ~/.claude ~/.codex
+ln -s ~/.agents/AGENTS.md ~/.claude/CLAUDE.md
+ln -s ~/.agents/AGENTS.md ~/.codex/AGENTS.md
+~/.agents/bin/link-claude-skills.sh
 ```
+
+If `ln` fails, the machine already has its own instructions file. Delete or
+move that file, then run `ln` again.
 
 ## Update
 
 ```sh
-git -C ~/.agents/skills pull
+git -C ~/.agents pull && ~/.agents/bin/link-claude-skills.sh
 ```
-
-Run the link loop again after a pull that adds a new skill.
 
 ## License
 
